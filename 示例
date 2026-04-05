@@ -1,0 +1,192 @@
+【小项目作业题目】
+Books to Scrape 图书抓取与字典统计报告（入门版）
+
+【合法练习网站】
+https://books.toscrape.com/
+（这是公开的爬虫练习站）
+
+【项目目标】
+用你已学知识完成：
+1. urllib.request.urlopen() 抓网页
+2. decode() 解码
+3. BeautifulSoup + find_all + tag.get + tag.text 提取数据
+4. 列表存字典
+5. dict.get() 做计数统计
+6. 排序
+7. 写 txt 报告
+
+【抓取字段】
+每本书抓 4 个字段：
+- title（书名）
+- price（价格）
+- rating（星级）
+- stock（库存状态）
+
+【必须输出】
+1. 控制台打印摘要
+2. 生成 books_report.txt，包含：
+- 总书数
+- 星级统计
+- 价格区间统计
+- 库存统计
+- 最贵3本
+- 最便宜3本
+
+【限制（防超纲）】
+不要用：
+- requests / pandas / selenium / playwright / class / 多线程 / 异步
+
+只用：
+- urllib.request
+- urllib.error
+- bs4(BeautifulSoup)
+- 基础字符串、列表、字典、for、if、函数、文件写入
+
+--------------------------------------------------
+【代码框架（你填 pass）】
+--------------------------------------------------
+
+import urllib.request
+import urllib.error
+from bs4 import BeautifulSoup
+
+def get_html(url):
+    """
+    功能：打开网页并返回 html 字符串
+    练习点：urlopen + read + decode + try/except
+    """
+    pass
+
+def get_soup(html):
+    """
+    功能：把 html 变成 BeautifulSoup 对象
+    """
+    pass
+
+def get_star_rating(book_tag):
+    """
+    功能：从 <p class="star-rating Three"> 提取星级
+    返回：One/Two/Three/Four/Five/Unknown
+    """
+    pass
+
+def get_price_number(price_text):
+    """
+    功能：'£51.77' -> 51.77
+    """
+    pass
+
+def get_price_bucket(price):
+    """
+    功能：价格分桶
+    <20 -> 0-20
+    <40 -> 20-40
+    else -> 40以上
+    """
+    pass
+
+def normalize_stock_text(stock_text):
+    """
+    功能：清理库存文本（去换行和多余空格）
+    """
+    pass
+
+def parse_books(html, category_name):
+    """
+    功能：提取所有图书，返回 books 列表
+    book 字典结构建议：
+    {
+        "title": ...,
+        "price": ...,
+        "price_text": ...,
+        "rating": ...,
+        "stock": ...,
+        "category": ...
+    }
+    """
+    pass
+
+def count_by_rating(books):
+    """
+    功能：统计星级数量
+    必练：dict.get(key, 0) + 1
+    """
+    pass
+
+def count_by_price_bucket(books):
+    """
+    功能：统计价格区间数量
+    """
+    pass
+
+def count_by_stock(books):
+    """
+    功能：统计库存状态数量
+    """
+    pass
+
+def sort_books_by_price(books):
+    """
+    功能：按价格从高到低排序
+    """
+    pass
+
+def sort_books_by_title(books):
+    """
+    功能：按标题字母排序
+    """
+    pass
+
+def print_summary(category_name, books, rating_count, price_count, stock_count):
+    """
+    功能：控制台打印摘要
+    """
+    pass
+
+def write_report(filename, category_name, books, rating_count, price_count, stock_count):
+    """
+    功能：写 txt 报告
+    文件名建议：books_report.txt
+    """
+    pass
+
+def main():
+    category_name = "Science"
+    url = "https://books.toscrape.com/catalogue/category/books/science_22/index.html"
+    report_file = "books_report.txt"
+
+    # 1. 获取 html
+    # 2. 解析 books
+    # 3. 做统计
+    # 4. 打印摘要
+    # 5. 写报告
+    pass
+
+if __name__ == "__main__":
+    main()
+
+--------------------------------------------------
+【开发顺序（按这个做不容易乱）】
+--------------------------------------------------
+
+1. 先写 get_html，确认能打印网页前 200 字符
+2. 再写 parse_books，只先抓 title
+3. 再补 price/rating/stock
+4. 再写 3 个 count 函数
+5. 再写排序函数
+6. 最后写 print_summary + write_report
+
+--------------------------------------------------
+【自查清单】
+--------------------------------------------------
+
+[ ] 用了 urlopen()
+[ ] 做了 decode()
+[ ] 用了 BeautifulSoup(html, "html.parser")
+[ ] 用了 find_all()
+[ ] 用了 tag.get() 或 tag.text
+[ ] books 是“列表套字典”
+[ ] 统计用了 dict.get()
+[ ] 有排序
+[ ] 有 txt 报告输出
+[ ] 总行数控制在 200 行以内

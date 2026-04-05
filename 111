@@ -1,0 +1,23 @@
+import urllib.request
+from bs4 import BeautifulSoup
+
+url = "https://books.toscrape.com/"
+
+# 1) 打开网页，读字节
+with urllib.request.urlopen(url, timeout=15) as f:
+    html_bytes = f.read()
+
+# 2) 字节解码成字符串
+html = html_bytes.decode("utf-8", errors="replace")
+
+# 3) 解析成 soup 对象
+soup = BeautifulSoup(html, "html.parser")
+
+# 4) 打印网页标题 + 前3本书名（确认能跑）
+print("页面标题：", soup.title.text.strip())
+
+book_tags = soup.find_all("article", class_="product_pod")
+for i, tag in enumerate(book_tags[:3], start=1):
+    a_tag = tag.find("h3").find("a")
+    title = a_tag.get("title", "Unknown")
+    print(f"{i}. {title}")
